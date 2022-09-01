@@ -1,0 +1,73 @@
+#
+version: '3.1'
+services:
+  mongo:
+    image: mongo:latest
+    # to keep container open
+    #tty: true
+    #stdin_open: true
+    container_name: my_mongodb
+    restart: always
+    networks:
+      - isolated_network
+    ports:
+      - "27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root_pw
+
+  loader:
+    build: api_to_mongo
+    image: api_mongo_image
+    tty: true
+    stdin_open: true
+    restart: on-failure
+    networks:
+      - isolated_network
+    depends_on:
+      - mongo
+
+  postgresql:
+    image: postgres:latest
+    container_name: postgresql_container
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root_pw
+      POSTGRES_DB: root_db
+    ports:
+      - "5432"
+    networks:
+      - isolated_network
+    depends_on:
+      - loader
+
+  from_mongo_to_psql:
+    build:  mongo_manipulate_psql
+    image: mongo_psql_image
+    container_name: mongo_psql
+    tty: true
+    stdin_open: true
+    restart: always
+    networks:
+      - isolated_network
+    depends_on:
+      - postgresql
+
+  deploy:
+    build: from_psql_to_dash
+    image: psql_dash_image
+    container_name: psql_dash_container
+    tty: true
+    stdin_open: true
+    restart: always
+    ports:
+      - "8050:8050"
+    networks:
+      - isolated_network
+    depends_on:
+      - from_mongo_to_psql
+
+
+networks:
+  isolated_network:
