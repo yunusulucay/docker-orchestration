@@ -48,7 +48,7 @@ services:
     container_name: mongo_psql
     tty: true
     stdin_open: true
-    restart: always
+    restart: on-failure
     networks:
       - isolated_network
     depends_on:

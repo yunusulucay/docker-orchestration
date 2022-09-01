@@ -18,7 +18,7 @@ try:
     my_collection = my_db["api_collection"]
 
     all_files = [i for i in my_db.my_collection.find({})]
-    print(all_files)
+    
     print("Get data from MongoDB!")
 except Exception as e:
     print(f"ERROR = {e}")

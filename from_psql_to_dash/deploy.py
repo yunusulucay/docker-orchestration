@@ -1,12 +1,13 @@
 import dash
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import html, dcc
 import plotly.graph_objects as go
 import plotly.express as px
 import psycopg2
 import time
 import warnings
 warnings.filterwarnings("ignore")
+
+time.sleep(60)
 
 try: 
     conn = psycopg2.connect(
