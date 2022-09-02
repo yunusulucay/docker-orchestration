@@ -10,9 +10,9 @@ try:
 except:
     # Default data
     data_json = {
-        'temperature': '+29 °C',
-        'wind': '19 km/h',
-        'description': 'Partly cloudy',
+        'temperature': '+0 °C',
+        'wind': '0 km/h',
+        'description': 'Unknown',
         'forecast': [{'day': '1', 'temperature': '+29 °C', 'wind': '26 km/h'},
         {'day': '2', 'temperature': '+26 °C', 'wind': '13 km/h'},
         {'day': '3', 'temperature': ' °C', 'wind': '27 km/h'}]}
