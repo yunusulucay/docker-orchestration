@@ -6,4 +6,6 @@ Hello, this is a pipeline using Docker. The main focus in this project is practi
 
 To use download the files. In the same directory run "docker-compose up --build -d"
 
+Wait for a while like 2-3 minutes. In browser go to localhost:8050
+
 For detailed information about the project you can look at the article : https://medium.com/p/a91a276f1c79/edit
